@@ -1,0 +1,27 @@
+{
+  "name": "node-login-registration",
+  "version": "1.0.0",
+  "description": "This is acadgild assignment for testing login and registration using express and mongoose",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nidhi16/NodeJs_Session14_Assignment4.git"
+  },
+  "author": "Nidhi Sinha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nidhi16/NodeJs_Session14_Assignment4/issues"
+  },
+  "homepage": "https://github.com/Nidhi16/NodeJs_Session14_Assignment4#readme",
+  "dependencies": {
+    "body-parser": "*",
+    "ejs": "^2.5.7",
+    "express": "*",
+    "express-session": "^1.15.6",
+    "mongoose": "^4.13.7"
+  }
+}
