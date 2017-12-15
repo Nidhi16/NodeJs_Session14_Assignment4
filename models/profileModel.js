@@ -2,6 +2,7 @@ var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var User = require('./model');
 
+// Made user profile model
 var userProfile = new Schema({
     user: String,
     email: String,
