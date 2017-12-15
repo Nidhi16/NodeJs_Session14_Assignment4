@@ -2,13 +2,21 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
+var session = require('express-session');
 
 var users = require('./routes/router');
 var User = require('./models/model');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'test rest',
+    resave: false,
+    saveUninitialized: true
+}));
+
+
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -38,7 +46,7 @@ app.get("/", function(request, response) {
             if(err) {
                 response.redirect("/login");
             } else {
-                response.redirect("/api/users");
+                response.redirect("/api/profile");
             }
         });
     }

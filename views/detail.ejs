@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/public/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <p>User Id: <%= user_id %></p>
+            <p>User Profile Id: <%= data._id %></p>
+            <p>Email: <%= data.email %></p>
+            <p>Phone: <%= data.phone %></p>
+            <p>D.O.B: <%= data.dob %></p>
+            <p>Address: <%= data.address %></p>
+        </div>
+        <button type="button" class="btn btn-default" id="update-btn">Update</button>
+        <button type="button" class="btn btn-default" id="delete-btn">Delete</button>
+
+        <form id="profile-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" value="<%= data.email %>">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" name="phone" value="<%= data.phone %>">
+            </div>
+            <div class="form-group">
+                <label for="dob">DOB:</label>
+                <input type="text" class="form-control" name="dob" value="<%= data.dob %>">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea name="address" class="form-control"><%= data.address %></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Update</button>
+        </form>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+<script src="/public/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#profile-form').hide();
+        $('#update-btn').on('click', function () {
+            $('#profile-form').show();
+        });
+        $('#profile-form').submit(function (event) {
+            event.preventDefault();
+            var formData = {
+                'email': $('input[name=email]').val(),
+                'phone': $('input[name=phone]').val(),
+                'dob': $('input[name=dob]').val(),
+                'address': $('textarea[name=address]').val()
+            };
+            $.ajax({
+                'url': '/api/profile/<%= data._id %>',
+                'type': 'PUT',
+                'dataType': 'json',
+                'data': formData
+            }).fail(function (error) {
+                console.log(error);
+            }).done(function (data) {
+                console.log("Done");
+                window.location.reload();
+            });
+        });
+        $('#delete-btn').on('click', function(){
+            $.ajax({
+                'url': '/api/profile/<%= data._id %>',
+                'type': 'DELETE'
+            }).fail(function (error) {
+                console.log(error);
+            }).done(function (data) {
+                console.log("Done");
+                window.location.href = '/api/profile';
+            });
+        })
+    });
+</script>
+</body>
+</html>
